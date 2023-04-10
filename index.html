@@ -27,13 +27,26 @@
     </div>
   </header>
   <main class="container">
+    <div class="img-wrapper">
+      <img src="./images/placeholder-image-square.jpg" alt="placeholder-image-square">
+    </div>
     <div data-view="entry-form">
-      <form action="#">
-        <label>Title<input type="text"></label>
-        <label>Photo URL<input type="url"></label>
-        <label>Notes<textarea name="notes" cols="30" rows="10"></textarea></label>
-        <button>SAVE</button>
-      </form>
+      <div class="row">
+        <form class="column-full" action="#">
+
+          <label for="title">Title</label>
+          <input id="title" type="text" name="title" required>
+
+          <label for="url" >Photo URL</label>
+          <input id="url" type="url" name="url" required>
+
+          <label for="textarea">Notes</label>
+          <textarea id="textarea" name="notes" cols="30" rows="10" required></textarea>
+
+          <button>SAVE</button>
+
+        </form>
+      </div>
     </div>
     <div data-view="entries" class="hidden"></div>
   </main>
