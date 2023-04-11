@@ -17,13 +17,11 @@
 </head>
 <body>
   <header>
+    <nav>
+      <p>Code Journal</p>
+    </nav>
     <div class="container">
-      <nav>
-        <p>Code Journal</p>
-      </nav>
-      <div class="heading">
-        <h1>New Entry</h1>
-      </div>
+      <h2>New Entry</h2>
     </div>
   </header>
   <main class="container">
@@ -43,7 +41,9 @@
           <label for="textarea">Notes</label>
           <textarea id="textarea" name="notes" cols="30" rows="10" required></textarea>
 
-          <button>SAVE</button>
+          <div class="form-footer">
+            <button type="submit">SAVE</button>
+          </div>
 
         </form>
       </div>
