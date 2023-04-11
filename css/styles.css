@@ -1,11 +1,29 @@
 * {
   font-family: sans-serif;
+  margin: 0;
 }
 
-nav {
+header {
+  background-color: #562b81;
+  color: white;
+}
+
+nav > p {
   background-color: #562b81;
   color: white;
   padding: 15px 20px;
+}
+
+nav > .row {
+  padding: 0.5rem 0;
+}
+
+.margin-top {
+  margin-top: 1rem;
+}
+
+div.column-full {
+  margin-bottom: 0.5rem;
 }
 
 body {
@@ -13,8 +31,12 @@ body {
 }
 
 img {
-  height: 260px;
   width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
 }
 
 label {
@@ -29,6 +51,10 @@ textarea {
   padding: 12px;
   border: 1px solid lightgrey;
   border-radius: 5px;
+}
+
+main {
+  margin-bottom: 25px;
 }
 
 button {
@@ -73,15 +99,6 @@ textarea {
 
   .textarea-label {
     display: block;
-  }
-
-  .img-wrapper,
-  .entry-form {
-    width: 50%;
-  }
-
-  .img-wrapper {
-    padding-right: 25px;
   }
 
   button:hover {

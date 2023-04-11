@@ -18,7 +18,9 @@
   <header>
     <nav class="container">
       <div class="row">
-        <p>Code Journal</p>
+        <div class="column-full">
+          <p>Code Journal</p>
+        </div>
       </div>
     </nav>
   </header>
@@ -30,17 +32,21 @@
     </div>
     <form action="#">
       <div class="row">
-        <div class="img-wrapper">
-          <img src="./images/placeholder-image-square.jpg" alt="placeholder-image-square">
+        <div class="column-half">
+          <div class="img-wrapper">
+            <img src="./images/placeholder-image-square.jpg" alt="placeholder-image-square">
+          </div>
         </div>
-        <div class="entry-form" data-view="entry-form">
-          <label for="title">Title</label>
-          <input id="title" type="text" name="title" required>
-          <label for="url">Photo URL</label>
-          <input id="url" type="url" name="url" required>
+        <div class="column-half">
+          <div class="entry-form" data-view="entry-form">
+            <label for="title">Title</label>
+            <input id="title" type="text" name="title" required>
+            <label for="url">Photo URL</label>
+            <input id="url" type="url" name="url" required>
+          </div>
         </div>
       </div>
-      <div>
+      <div class="column-full">
         <label class="textarea-label" for="textarea">Notes</label>
         <textarea id="textarea" name="notes" cols="30" rows="10" required></textarea>
         <div class="form-footer">
