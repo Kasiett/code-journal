@@ -1,0 +1,107 @@
+* {
+  font-family: sans-serif;
+  margin: 0;
+}
+
+header {
+  background-color: #562b81;
+  color: white;
+}
+
+nav > p {
+  background-color: #562b81;
+  color: white;
+  padding: 15px 20px;
+}
+
+nav > .row {
+  padding: 0.5rem 0;
+}
+
+.margin-top {
+  margin-top: 1rem;
+}
+
+div.column-full {
+  margin-bottom: 0.5rem;
+}
+
+body {
+  background-color: #f0f0f0;
+}
+
+img {
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  padding: 10px 0;
+  letter-spacing: 1px;
+  font-weight: 550;
+  display: block;
+}
+
+input,
+textarea {
+  padding: 12px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+main {
+  margin-bottom: 25px;
+}
+
+button {
+  width: 80px;
+  padding: 7px 15px;
+  color: white;
+  background-color: #562b81;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #461972;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 15px;
+}
+
+input {
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+}
+
+.entry-form {
+  width: 100%;
+}
+
+.img-wrapper {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  textarea {
+    width: 100%;
+  }
+
+  .textarea-label {
+    display: block;
+  }
+
+  button:hover {
+    background-color: #461972;
+  }
+}
