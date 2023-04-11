@@ -25,29 +25,28 @@
     </div>
   </header>
   <main class="container">
-    <div class="img-wrapper">
-      <img src="./images/placeholder-image-square.jpg" alt="placeholder-image-square">
-    </div>
-    <div data-view="entry-form">
-      <div class="row">
-        <form class="column-full" action="#">
-
+    <div class="row">
+      <div class="img-wrapper">
+        <img src="./images/placeholder-image-square.jpg" alt="placeholder-image-square">
+      </div>
+      <div class="entry-form" data-view="entry-form">
+        <form action="#">
           <label for="title">Title</label>
           <input id="title" type="text" name="title" required>
-
           <label for="url" >Photo URL</label>
           <input id="url" type="url" name="url" required>
-
-          <label for="textarea">Notes</label>
-          <textarea id="textarea" name="notes" cols="30" rows="10" required></textarea>
-
-          <div class="form-footer">
-            <button type="submit">SAVE</button>
-          </div>
-
         </form>
       </div>
     </div>
+
+    <div>
+      <label class="textarea-label" for="textarea">Notes</label>
+      <textarea id="textarea" name="notes" cols="30" rows="10" required></textarea>
+      <div class="form-footer">
+        <button type="submit">SAVE</button>
+      </div>
+    </div>
+
     <div data-view="entries" class="hidden"></div>
   </main>
   <script src="js/data.js"></script>

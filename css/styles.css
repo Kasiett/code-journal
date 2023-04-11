@@ -53,3 +53,35 @@ button {
   justify-content: flex-end;
   padding-top: 15px;
 }
+
+.img-wrapper,
+.entry-form {
+  width: 100%;
+}
+
+.textarea-label {
+  display: block;
+}
+
+textarea {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  textarea {
+    width: 100%;
+  }
+
+  .textarea-label {
+    display: block;
+  }
+
+  .img-wrapper,
+  .entry-form {
+    width: 50%;
+  }
+
+  .img-wrapper {
+    padding-right: 25px;
+  }
+}
