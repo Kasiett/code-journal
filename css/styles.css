@@ -17,11 +17,6 @@ img {
   width: 100%;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-}
-
 label {
   padding: 10px 0;
   letter-spacing: 1px;
@@ -34,10 +29,6 @@ textarea {
   padding: 12px;
   border: 1px solid lightgrey;
   border-radius: 5px;
-}
-
-main {
-  margin-bottom: 25px;
 }
 
 button {
