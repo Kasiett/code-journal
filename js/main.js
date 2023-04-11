@@ -3,3 +3,18 @@ const img = document.querySelector('img');
 input.addEventListener('input', function (e) {
   img.setAttribute('src', e.target.value);
 });
+
+const form = document.querySelector('form');
+// const title = document.querySelector('#title');
+// const url = document.querySelector('#url');
+// const textArea = document.querySelector('#textarea');
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  // const formData = {
+  //   title: form.elements.title.value,
+  //   url: form.elements.url.value,
+  //   textarea: form.elements.textarea.value
+  // };
+
+  form.reset();
+});

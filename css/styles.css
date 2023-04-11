@@ -49,6 +49,10 @@ button {
   border-radius: 5px;
 }
 
+button:hover {
+  background-color: #461972;
+}
+
 .form-footer {
   display: flex;
   justify-content: flex-end;
@@ -87,5 +91,9 @@ textarea {
 
   .img-wrapper {
     padding-right: 25px;
+  }
+
+  button:hover {
+    background-color: #461972;
   }
 }
