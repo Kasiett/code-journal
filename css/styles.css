@@ -26,6 +26,7 @@ label {
   padding: 10px 0;
   letter-spacing: 1px;
   font-weight: 550;
+  display: block;
 }
 
 input,
@@ -54,16 +55,19 @@ button {
   padding-top: 15px;
 }
 
-.img-wrapper,
+input {
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+}
+
 .entry-form {
   width: 100%;
 }
 
-.textarea-label {
-  display: block;
-}
-
-textarea {
+.img-wrapper {
   width: 100%;
 }
 
