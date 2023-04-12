@@ -2,6 +2,7 @@ const $input = document.querySelector('#url');
 const $img = document.querySelector('img');
 const $attributeValue = $img.getAttribute('src');
 const ul = document.querySelector('ul');
+const noRecordsLi = document.querySelector('.no-records');
 
 $input.addEventListener('input', function (e) {
   $img.setAttribute('src', e.target.value);
@@ -57,8 +58,13 @@ function renderEntry(entry) {
 }
 // console.log(renderEntry(data.entries[0]));
 
-document.addEventListener('DOMContentLoaded', function (e) {
-  for (let i = 0; i < data.entries.length; i++) {
-    ul.appendChild(renderEntry(data.entries[i]));
-  }
-});
+if (data.entries.length === 0) {
+  noRecordsLi.className = 'no-records';
+} else {
+  noRecordsLi.className = 'hidden';
+  document.addEventListener('DOMContentLoaded', function (e) {
+    for (let i = 0; i < data.entries.length; i++) {
+      ul.appendChild(renderEntry(data.entries[i]));
+    }
+  });
+}
