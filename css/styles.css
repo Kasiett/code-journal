@@ -97,6 +97,7 @@ textarea {
 .entries-p {
   line-height: 1.5rem;
   margin: 2rem 0;
+  white-space: pre-line;
 }
 
 .entries-h2 {
