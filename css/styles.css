@@ -92,6 +92,30 @@ textarea {
   width: 100%;
 }
 
+/* mobil styles for entries page */
+
+.entries-p {
+  line-height: 1.5rem;
+  margin: 2rem 0;
+}
+
+.entries-h2 {
+  line-height: 4rem;
+}
+
+.entries-img {
+  height: 350px;
+  margin-bottom: 70px;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
 @media screen and (min-width: 768px) {
   textarea {
     width: 100%;
@@ -103,5 +127,23 @@ textarea {
 
   button:hover {
     background-color: #461972;
+  }
+
+  /* desktop styles for entries page */
+
+  li {
+    display: flex;
+    list-style: none;
+  }
+
+  .entries-h2,
+  .entries-p {
+    margin: 0 20px 20px;
+    line-height: 1.5rem;
+  }
+
+  .entries-img {
+    height: 350px;
+    margin-bottom: 70px;
   }
 }
