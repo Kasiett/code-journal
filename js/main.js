@@ -1,6 +1,7 @@
 const $input = document.querySelector('#url');
 const $img = document.querySelector('img');
 const $attributeValue = $img.getAttribute('src');
+const ul = document.querySelector('ul');
 
 $input.addEventListener('input', function (e) {
   $img.setAttribute('src', e.target.value);
@@ -24,14 +25,8 @@ $form.addEventListener('submit', function (e) {
 /// ////Code for entry page below
 
 function renderEntry(entry) {
-  const divDataView = document.createElement('div');
-  divDataView.setAttribute('data-view', 'entries');
-
-  const ul = document.createElement('ul');
-  divDataView.appendChild(ul);
 
   const list = document.createElement('li');
-  ul.appendChild(list);
 
   const firstDivColHalf = document.createElement('div');
   firstDivColHalf.setAttribute('class', 'column-half');
@@ -58,7 +53,12 @@ function renderEntry(entry) {
   const paraTextOne = document.createTextNode(entry.textarea);
   paragraph.appendChild(paraTextOne);
   secondDivColHalf.appendChild(paragraph);
-
-  return divDataView;
+  return list;
 }
-renderEntry(data.entries[0]);
+// console.log(renderEntry(data.entries[0]));
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  for (let i = 0; i < data.entries.length; i++) {
+    ul.appendChild(renderEntry(data.entries[i]));
+  }
+});
