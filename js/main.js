@@ -58,13 +58,18 @@ function renderEntry(entry) {
 }
 // console.log(renderEntry(data.entries[0]));
 
-if (data.entries.length === 0) {
-  noRecordsLi.className = 'no-records';
-} else {
-  noRecordsLi.className = 'hidden';
-  document.addEventListener('DOMContentLoaded', function (e) {
-    for (let i = 0; i < data.entries.length; i++) {
-      ul.appendChild(renderEntry(data.entries[i]));
-    }
-  });
+function toggleNoEntries() {
+  if (data.entries.length === 0) {
+    noRecordsLi.className = 'no-records';
+  } else {
+    noRecordsLi.className = 'hidden';
+    document.addEventListener('DOMContentLoaded', function (e) {
+      for (let i = 0; i < data.entries.length; i++) {
+        ul.appendChild(renderEntry(data.entries[i]));
+      }
+    });
+    return toggleNoEntries;
+  }
 }
+
+toggleNoEntries();

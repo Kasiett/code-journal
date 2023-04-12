@@ -147,4 +147,10 @@ li {
     height: 350px;
     margin-bottom: 70px;
   }
+
+  .no-records {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+  }
 }
