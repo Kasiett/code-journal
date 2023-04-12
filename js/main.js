@@ -3,6 +3,12 @@ const $img = document.querySelector('img');
 const $attributeValue = $img.getAttribute('src');
 const ul = document.querySelector('ul');
 const noRecordsLi = document.querySelector('.no-records');
+const dVEntryForm = document.querySelector('[data-view="entry-form"]');
+const dVEntries = document.querySelector('[data-view="entries"]');
+const dVEntriesAttribute = dVEntries.getAttribute('data-view');
+// const dVEntryFormAttribute = dVEntryForm.getAttribute('data-view');
+
+// console.log('dVEntryFormAttribute ==>', dVEntryFormAttribute);
 
 $input.addEventListener('input', function (e) {
   $img.setAttribute('src', e.target.value);
@@ -73,3 +79,12 @@ function toggleNoEntries() {
 }
 
 toggleNoEntries();
+
+function viewSwap(string) {
+  if (string === dVEntriesAttribute) {
+    dVEntryForm.className = 'hidden';
+  } else {
+    dVEntries.className = 'hidden';
+  }
+}
+viewSwap('entry-form');
