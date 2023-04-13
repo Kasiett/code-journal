@@ -19,42 +19,57 @@
     <nav class="container">
       <div class="row">
         <div class="column-full">
-          <p>Code Journal</p>
+          <span class="nav-bar span">Code Journal</span>
+          <a href="#" class="nav-anchor">Entries</a>
         </div>
       </div>
     </nav>
   </header>
   <main class="container">
-    <div class="row margin-top">
-      <div class="column-full">
-        <h2>New Entry</h2>
+    <div data-view="entry-form">
+      <div class="row margin-top">
+        <div class="column-full">
+          <h2>New Entry</h2>
+        </div>
       </div>
+      <form action="#">
+        <div class="row">
+          <div class="column-half">
+            <div class="img-wrapper">
+              <img src="./images/placeholder-image-square.jpg" alt="placeholder-image-square">
+            </div>
+          </div>
+          <div class="column-half">
+            <div class="entry-form">
+              <label for="title">Title</label>
+              <input id="title" type="text" name="title" required>
+              <label for="url">Photo URL</label>
+              <input id="url" type="url" name="url" required>
+            </div>
+          </div>
+        </div>
+        <div class="column-full">
+          <label class="textarea-label" for="textarea">Notes</label>
+          <textarea id="textarea" name="notes" cols="30" rows="10" required></textarea>
+          <div class="form-footer">
+            <button type="submit">SAVE</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <form action="#">
-      <div class="row">
-        <div class="column-half">
-          <div class="img-wrapper">
-            <img src="./images/placeholder-image-square.jpg" alt="placeholder-image-square">
-          </div>
-        </div>
-        <div class="column-half">
-          <div class="entry-form" data-view="entry-form">
-            <label for="title">Title</label>
-            <input id="title" type="text" name="title" required>
-            <label for="url">Photo URL</label>
-            <input id="url" type="url" name="url" required>
-          </div>
-        </div>
+
+
+    <!-- Unordered list of entries -->
+
+
+    <div data-view="entries" class="hidden">
+      <div class="entries-nav">
+        <h2 class="last-entries-h2">Entries</h2>
+        <button class="new-btn"><a>NEW</a></button>
       </div>
-      <div class="column-full">
-        <label class="textarea-label" for="textarea">Notes</label>
-        <textarea id="textarea" name="notes" cols="30" rows="10" required></textarea>
-        <div class="form-footer">
-          <button type="submit">SAVE</button>
-        </div>
-      </div>
-    </form>
-    <div data-view="entries" class="hidden"></div>
+      <p class="no-records">No entries have been recorded</p>
+      <ul></ul>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
