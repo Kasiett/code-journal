@@ -37,6 +37,7 @@ $form.addEventListener('submit', function (e) {
 
 function renderEntry(entry) {
   const list = document.createElement('li');
+  list.setAttribute('data-entry-id', 'entryId');
 
   const firstDivColHalf = document.createElement('div');
   firstDivColHalf.setAttribute('class', 'column-half');
@@ -52,10 +53,19 @@ function renderEntry(entry) {
   secondDivColHalf.setAttribute('class', 'column-half');
   list.appendChild(secondDivColHalf);
 
+  const divIcon = document.createElement('div');
+  divIcon.setAttribute('class', 'icon');
+  secondDivColHalf.appendChild(divIcon);
+
   const h2Title = document.createElement('h2');
   h2Title.setAttribute('class', 'entries-h2');
   h2Title.textContent = entry.title;
-  secondDivColHalf.appendChild(h2Title);
+  divIcon.appendChild(h2Title);
+
+  const icon = document.createElement('i');
+  icon.setAttribute('class', 'fa fa-pencil');
+  icon.setAttribute('aria-hidden', 'true');
+  divIcon.appendChild(icon);
 
   const paragraph = document.createElement('p');
   paragraph.setAttribute('class', 'entries-p');
