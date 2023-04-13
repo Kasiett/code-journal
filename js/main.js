@@ -2,11 +2,10 @@ const $input = document.querySelector('#url');
 const $img = document.querySelector('img');
 const $attributeValue = $img.getAttribute('src');
 const ul = document.querySelector('ul');
-// const noRecordsLi = document.querySelector('.no-records');
+const noRecordsLi = document.querySelector('.no-records');
 const dVEntryForm = document.querySelector('[data-view="entry-form"]');
 const dVEntries = document.querySelector('[data-view="entries"]');
 const dVEntriesAttribute = dVEntries.getAttribute('data-view');
-// const dVEntryFormAttribute = dVEntryForm.getAttribute('data-view');
 const entriesAnchor = document.querySelector('.nav-anchor');
 const btnNew = document.querySelector('.new-btn');
 
@@ -30,6 +29,8 @@ $form.addEventListener('submit', function (e) {
 
   ul.prepend(renderEntry(formData));
   viewSwap('entries');
+  toggleNoEntries();
+
 });
 
 /// ////Code for entry page below
@@ -66,12 +67,11 @@ function renderEntry(entry) {
 }
 
 function toggleNoEntries() {
-  const liNorecords = document.createElement('li');
-  const noRecordsText = document.createTextNode('No entries have been recorded');
   if (data.entries.length === 0) {
-    liNorecords.setAttribute('class', 'no-records');
-    liNorecords.appendChild(noRecordsText);
-    ul.appendChild(liNorecords);
+    noRecordsLi.className = 'no-records';
+  } else {
+    noRecordsLi.className = 'hidden';
+
   }
 }
 
@@ -82,15 +82,20 @@ document.addEventListener('DOMContentLoaded', function (e) {
   }
   viewSwap(data.view);
   toggleNoEntries();
+
 });
 
 function viewSwap(string) {
+
+  data.view = string;
+
   if (string === dVEntriesAttribute) {
     dVEntryForm.className = 'hidden';
     dVEntries.className = '';
   } else {
     dVEntries.className = 'hidden';
     dVEntryForm.className = '';
+
   }
 }
 
