@@ -1,13 +1,13 @@
 const $input = document.querySelector('#url');
 const $img = document.querySelector('img');
 const $attributeValue = $img.getAttribute('src');
-const ul = document.querySelector('ul');
-const noRecordsLi = document.querySelector('.no-records');
-const dVEntryForm = document.querySelector('[data-view="entry-form"]');
-const dVEntries = document.querySelector('[data-view="entries"]');
-const dVEntriesAttribute = dVEntries.getAttribute('data-view');
-const entriesAnchor = document.querySelector('.nav-anchor');
-const btnNew = document.querySelector('.new-btn');
+const $ul = document.querySelector('ul');
+const $noRecordsP = document.querySelector('.no-records');
+const $dVEntryForm = document.querySelector('[data-view="entry-form"]');
+const $dVEntries = document.querySelector('[data-view="entries"]');
+const $dVEntriesAttribute = $dVEntries.getAttribute('data-view');
+const $entriesAnchor = document.querySelector('.nav-anchor');
+const $btnNew = document.querySelector('.new-btn');
 
 $input.addEventListener('input', function (e) {
   $img.setAttribute('src', e.target.value);
@@ -27,7 +27,7 @@ $form.addEventListener('submit', function (e) {
   $img.setAttribute('src', $attributeValue);
   $form.reset();
 
-  ul.prepend(renderEntry(formData));
+  $ul.prepend(renderEntry(formData));
   viewSwap('entries');
   toggleNoEntries();
 
@@ -54,8 +54,7 @@ function renderEntry(entry) {
 
   const h2Title = document.createElement('h2');
   h2Title.setAttribute('class', 'entries-h2');
-  const title = document.createTextNode(entry.title);
-  h2Title.appendChild(title);
+  h2Title.textContent = entry.title;
   secondDivColHalf.appendChild(h2Title);
 
   const paragraph = document.createElement('p');
@@ -68,9 +67,9 @@ function renderEntry(entry) {
 
 function toggleNoEntries() {
   if (data.entries.length === 0) {
-    noRecordsLi.className = 'no-records';
+    $noRecordsP.className = 'no-records';
   } else {
-    noRecordsLi.className = 'hidden';
+    $noRecordsP.className = 'hidden';
 
   }
 }
@@ -78,7 +77,7 @@ function toggleNoEntries() {
 document.addEventListener('DOMContentLoaded', function (e) {
   for (let i = 0; i < data.entries.length; i++) {
     const newListItem = renderEntry(data.entries[i]);
-    ul.appendChild(newListItem);
+    $ul.appendChild(newListItem);
   }
   viewSwap(data.view);
   toggleNoEntries();
@@ -89,21 +88,21 @@ function viewSwap(string) {
 
   data.view = string;
 
-  if (string === dVEntriesAttribute) {
-    dVEntryForm.className = 'hidden';
-    dVEntries.className = '';
+  if (string === $dVEntriesAttribute) {
+    $dVEntryForm.className = 'hidden';
+    $dVEntries.className = '';
   } else {
-    dVEntries.className = 'hidden';
-    dVEntryForm.className = '';
+    $dVEntries.className = 'hidden';
+    $dVEntryForm.className = '';
 
   }
 }
 
-entriesAnchor.addEventListener('click', function (e) {
+$entriesAnchor.addEventListener('click', function (e) {
   viewSwap('entries');
 });
 
-btnNew.addEventListener('click', function (e) {
+$btnNew.addEventListener('click', function (e) {
   viewSwap('entry-form');
 
 });

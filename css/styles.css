@@ -19,12 +19,6 @@ header {
   font-size: medium;
 }
 
-/* nav > span {
-  background-color: #562b81;
-  color: white;
-  padding: 15px 20px;
-} */
-
 nav > .row {
   padding: 0.5rem 0;
 }
