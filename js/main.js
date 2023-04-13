@@ -2,13 +2,13 @@ const $input = document.querySelector('#url');
 const $img = document.querySelector('img');
 const $attributeValue = $img.getAttribute('src');
 const ul = document.querySelector('ul');
-const noRecordsLi = document.querySelector('.no-records');
+// const noRecordsLi = document.querySelector('.no-records');
 const dVEntryForm = document.querySelector('[data-view="entry-form"]');
 const dVEntries = document.querySelector('[data-view="entries"]');
 const dVEntriesAttribute = dVEntries.getAttribute('data-view');
 // const dVEntryFormAttribute = dVEntryForm.getAttribute('data-view');
-
-// console.log('dVEntryFormAttribute ==>', dVEntryFormAttribute);
+const entriesAnchor = document.querySelector('.nav-anchor');
+const btnNew = document.querySelector('.new-btn');
 
 $input.addEventListener('input', function (e) {
   $img.setAttribute('src', e.target.value);
@@ -27,12 +27,14 @@ $form.addEventListener('submit', function (e) {
   data.entries.unshift(formData);
   $img.setAttribute('src', $attributeValue);
   $form.reset();
+
+  ul.prepend(renderEntry(formData));
+  viewSwap('entries');
 });
 
 /// ////Code for entry page below
 
 function renderEntry(entry) {
-
   const list = document.createElement('li');
 
   const firstDivColHalf = document.createElement('div');
@@ -62,29 +64,41 @@ function renderEntry(entry) {
   secondDivColHalf.appendChild(paragraph);
   return list;
 }
-// console.log(renderEntry(data.entries[0]));
 
 function toggleNoEntries() {
+  const liNorecords = document.createElement('li');
+  const noRecordsText = document.createTextNode('No entries have been recorded');
   if (data.entries.length === 0) {
-    noRecordsLi.className = 'no-records';
-  } else {
-    noRecordsLi.className = 'hidden';
-    document.addEventListener('DOMContentLoaded', function (e) {
-      for (let i = 0; i < data.entries.length; i++) {
-        ul.appendChild(renderEntry(data.entries[i]));
-      }
-    });
-    return toggleNoEntries;
+    liNorecords.setAttribute('class', 'no-records');
+    liNorecords.appendChild(noRecordsText);
+    ul.appendChild(liNorecords);
   }
 }
 
-toggleNoEntries();
+document.addEventListener('DOMContentLoaded', function (e) {
+  for (let i = 0; i < data.entries.length; i++) {
+    const newListItem = renderEntry(data.entries[i]);
+    ul.appendChild(newListItem);
+  }
+  viewSwap(data.view);
+  toggleNoEntries();
+});
 
 function viewSwap(string) {
   if (string === dVEntriesAttribute) {
     dVEntryForm.className = 'hidden';
+    dVEntries.className = '';
   } else {
     dVEntries.className = 'hidden';
+    dVEntryForm.className = '';
   }
 }
-viewSwap('entry-form');
+
+entriesAnchor.addEventListener('click', function (e) {
+  viewSwap('entries');
+});
+
+btnNew.addEventListener('click', function (e) {
+  viewSwap('entry-form');
+
+});

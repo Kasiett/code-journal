@@ -19,7 +19,8 @@
     <nav class="container">
       <div class="row">
         <div class="column-full">
-          <p>Code Journal</p>
+          <span class="nav-bar span">Code Journal</span>
+          <a href="#" class="nav-anchor">Entries</a>
         </div>
       </div>
     </nav>
@@ -59,12 +60,14 @@
 
 
     <!-- Unordered list of entries -->
-    <!-- class="hidden" this class goes in to line 62 as a div attribute -->
 
-    <div data-view="entries">
-      <ul>
-        <li class="no-records">No entries have been recorded</li>
-      </ul>
+
+    <div data-view="entries" class="hidden">
+      <div class="entries-nav">
+        <h2 class="last-entries-h2">Entries</h2>
+        <button class="new-btn"><a>NEW</a></button>
+      </div>
+      <ul></ul>
     </div>
   </main>
   <script src="js/data.js"></script>

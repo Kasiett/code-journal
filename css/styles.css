@@ -8,11 +8,22 @@ header {
   color: white;
 }
 
-nav > p {
+.span {
+  font-size: larger;
+  margin-right: 20px;
+}
+
+.nav-anchor {
+  text-decoration: none;
+  color: white;
+  font-size: medium;
+}
+
+/* nav > span {
   background-color: #562b81;
   color: white;
   padding: 15px 20px;
-}
+} */
 
 nav > .row {
   padding: 0.5rem 0;
@@ -115,6 +126,31 @@ ul {
 
 li {
   list-style: none;
+}
+
+.entries-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.last-entries-h2 {
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
+.new-btn {
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background-color: #562b81;
+  width: 60px;
+  padding: 7px 11px;
+  margin-top: 20px;
+  color: white;
+}
+
+div.new-btn:hover {
+  background-color: #461972;
 }
 
 @media screen and (min-width: 768px) {
