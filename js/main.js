@@ -1,6 +1,8 @@
 const $input = document.querySelector('#url');
 const $img = document.querySelector('img');
 const $attributeValue = $img.getAttribute('src');
+const $textArea = document.querySelector('#textarea');
+const $title = document.querySelector('#title');
 const $ul = document.querySelector('ul');
 const $noRecordsP = document.querySelector('.no-records');
 const $dVEntryForm = document.querySelector('[data-view="entry-form"]');
@@ -8,6 +10,7 @@ const $dVEntries = document.querySelector('[data-view="entries"]');
 const $dVEntriesAttribute = $dVEntries.getAttribute('data-view');
 const $entriesAnchor = document.querySelector('.nav-anchor');
 const $btnNew = document.querySelector('.new-btn');
+const $labelTitle = document.querySelector('#edit-entry');
 
 $input.addEventListener('input', function (e) {
   $img.setAttribute('src', e.target.value);
@@ -16,20 +19,35 @@ $input.addEventListener('input', function (e) {
 const $form = document.querySelector('form');
 $form.addEventListener('submit', function (e) {
   e.preventDefault();
-  const formData = {
-    title: $form.elements.title.value,
-    url: $form.elements.url.value,
-    textarea: $form.elements.textarea.value
-  };
+  // console.log('data.editing->', data.editing);
 
-  formData.entryId = data.nextEntryId++;
-  data.entries.unshift(formData);
-  $img.setAttribute('src', $attributeValue);
-  $form.reset();
+  if (data.editing === null) {
+    const formData = {
+      title: $form.elements.title.value,
+      url: $form.elements.url.value,
+      textarea: $form.elements.textarea.value
+    };
 
-  $ul.prepend(renderEntry(formData));
-  viewSwap('entries');
-  toggleNoEntries();
+    formData.entryId = data.nextEntryId++;
+    data.entries.unshift(formData);
+    $img.setAttribute('src', $attributeValue);
+    $form.reset();
+
+    $ul.prepend(renderEntry(formData));
+    viewSwap('entries');
+    toggleNoEntries();
+    // console.log('data.editing ->', data.editing);
+
+  } else {
+    data.editing.title = $form.elements.title.value;
+    data.editing.url = $form.elements.url.value;
+    data.editing.textarea = $form.elements.textarea.value;
+    // const listNode = document.querySelectorAll('li');
+    // for (let i = 0; i < data.entries.length; i++) {
+    //   renderEntry();
+    // }
+
+  }
 
 });
 
@@ -37,7 +55,7 @@ $form.addEventListener('submit', function (e) {
 
 function renderEntry(entry) {
   const list = document.createElement('li');
-  list.setAttribute('data-entry-id', 'entryId');
+  list.setAttribute('data-entry-id', entry.entryId);
 
   const firstDivColHalf = document.createElement('div');
   firstDivColHalf.setAttribute('class', 'column-half');
@@ -74,6 +92,26 @@ function renderEntry(entry) {
   secondDivColHalf.appendChild(paragraph);
   return list;
 }
+
+$ul.addEventListener('click', function (e) {
+  viewSwap('entry-form');
+  const listItem = document.querySelector('[data-entry-id]');
+  const listAttribute = parseInt(listItem.getAttribute('data-entry-id'));
+
+  for (let i = 0; i < data.entries.length; i++) {
+
+    if (data.entries[i].entryId === listAttribute) {
+      data.editing = data.entries[i];
+    }
+
+  }
+  $title.setAttribute('value', data.editing.title);
+  $input.setAttribute('value', data.editing.url);
+  $textArea.value = data.editing.textarea;
+  $img.setAttribute('src', data.editing.url);
+  $labelTitle.textContent = 'Edit Entry';
+
+});
 
 function toggleNoEntries() {
   if (data.entries.length === 0) {
