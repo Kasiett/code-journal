@@ -19,34 +19,37 @@ $input.addEventListener('input', function (e) {
 const $form = document.querySelector('form');
 $form.addEventListener('submit', function (e) {
   e.preventDefault();
-  // console.log('data.editing->', data.editing);
-
   if (data.editing === null) {
     const formData = {
       title: $form.elements.title.value,
       url: $form.elements.url.value,
-      textarea: $form.elements.textarea.value
+      textarea: $form.elements.textarea.value,
+      entryId: data.nextEntryId
     };
 
     formData.entryId = data.nextEntryId++;
     data.entries.unshift(formData);
     $img.setAttribute('src', $attributeValue);
-    $form.reset();
-
     $ul.prepend(renderEntry(formData));
+    $form.reset();
     viewSwap('entries');
     toggleNoEntries();
-    // console.log('data.editing ->', data.editing);
-
   } else {
-    data.editing.title = $form.elements.title.value;
-    data.editing.url = $form.elements.url.value;
-    data.editing.textarea = $form.elements.textarea.value;
-    // const listNode = document.querySelectorAll('li');
-    // for (let i = 0; i < data.entries.length; i++) {
-    //   renderEntry();
-    // }
+    const newData = {
+      title: $form.elements.title.value,
+      url: $form.elements.url.value,
+      textarea: $form.elements.textarea.value,
+      entryId: data.editing.entryId
+    };
 
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === data.editing.entryId) {
+        data.entries[i] = newData;
+      }
+    }
+    data.editing = null;
+    viewSwap('entries');
+    location.reload();
   }
 
 });
@@ -93,24 +96,21 @@ function renderEntry(entry) {
   return list;
 }
 
-$ul.addEventListener('click', function (e) {
+$ul.addEventListener('click', function (event) {
   viewSwap('entry-form');
-  const listItem = document.querySelector('[data-entry-id]');
+  const listItem = event.target.closest('li');
   const listAttribute = parseInt(listItem.getAttribute('data-entry-id'));
 
   for (let i = 0; i < data.entries.length; i++) {
-
     if (data.entries[i].entryId === listAttribute) {
       data.editing = data.entries[i];
     }
-
   }
   $title.setAttribute('value', data.editing.title);
   $input.setAttribute('value', data.editing.url);
   $textArea.value = data.editing.textarea;
   $img.setAttribute('src', data.editing.url);
   $labelTitle.textContent = 'Edit Entry';
-
 });
 
 function toggleNoEntries() {
@@ -151,6 +151,9 @@ $entriesAnchor.addEventListener('click', function (e) {
 });
 
 $btnNew.addEventListener('click', function (e) {
+  data.editing = null;
+  $form.reset();
+  $labelTitle.textContent = 'New Entry';
   viewSwap('entry-form');
 
 });
