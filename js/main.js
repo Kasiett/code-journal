@@ -47,10 +47,18 @@ $form.addEventListener('submit', function (e) {
         data.entries[i] = newData;
       }
     }
-    data.editing = null;
-    viewSwap('entries');
-    location.reload();
+    const newEl = renderEntry(newData);
+    const allList = document.querySelectorAll('li');
+    for (let i = 0; i < allList.length; i++) {
+      const listId = Number(allList[i].getAttribute('data-entry-id'));
+      if (data.editing.entryId === listId) {
+        allList[i].replaceWith(newEl);
+      }
+    }
+
   }
+  data.editing = null;
+  viewSwap('entries');
 
 });
 
@@ -153,6 +161,9 @@ $entriesAnchor.addEventListener('click', function (e) {
 $btnNew.addEventListener('click', function (e) {
   data.editing = null;
   $form.reset();
+  $title.value = '';
+  $input.value = '';
+  $img.src = './images/placeholder-image-square.jpg';
   $labelTitle.textContent = 'New Entry';
   viewSwap('entry-form');
 
