@@ -11,6 +11,7 @@ const $dVEntriesAttribute = $dVEntries.getAttribute('data-view');
 const $entriesAnchor = document.querySelector('.nav-anchor');
 const $btnNew = document.querySelector('.new-btn');
 const $labelTitle = document.querySelector('#edit-entry');
+const $editEntry = document.querySelector('.edit-entry-title');
 
 $input.addEventListener('input', function (e) {
   $img.setAttribute('src', e.target.value);
@@ -119,6 +120,7 @@ $ul.addEventListener('click', function (event) {
   $textArea.value = data.editing.textarea;
   $img.setAttribute('src', data.editing.url);
   $labelTitle.textContent = 'Edit Entry';
+  $editEntry.textContent = 'Edit Entry';
 });
 
 function toggleNoEntries() {
@@ -165,6 +167,8 @@ $btnNew.addEventListener('click', function (e) {
   $input.value = '';
   $img.src = './images/placeholder-image-square.jpg';
   $labelTitle.textContent = 'New Entry';
+  $editEntry.textContent = 'New Entry';
+
   viewSwap('entry-form');
 
 });
