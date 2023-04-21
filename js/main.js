@@ -10,7 +10,6 @@ const $dVEntries = document.querySelector('[data-view="entries"]');
 const $dVEntriesAttribute = $dVEntries.getAttribute('data-view');
 const $entriesAnchor = document.querySelector('.nav-anchor');
 const $btnNew = document.querySelector('.new-btn');
-const $labelTitle = document.querySelector('#edit-entry');
 const $editEntry = document.querySelector('.edit-entry-title');
 
 $input.addEventListener('input', function (e) {
@@ -163,7 +162,6 @@ $btnNew.addEventListener('click', function (e) {
   data.editing = null;
   $form.reset();
   $img.src = './images/placeholder-image-square.jpg';
-  $labelTitle.textContent = 'New Entry';
   $editEntry.textContent = 'New Entry';
 
   viewSwap('entry-form');
