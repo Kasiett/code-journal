@@ -1,6 +1,8 @@
 const $input = document.querySelector('#url');
 const $img = document.querySelector('img');
 const $attributeValue = $img.getAttribute('src');
+const $textArea = document.querySelector('#textarea');
+const $title = document.querySelector('#title');
 const $ul = document.querySelector('ul');
 const $noRecordsP = document.querySelector('.no-records');
 const $dVEntryForm = document.querySelector('[data-view="entry-form"]');
@@ -8,6 +10,7 @@ const $dVEntries = document.querySelector('[data-view="entries"]');
 const $dVEntriesAttribute = $dVEntries.getAttribute('data-view');
 const $entriesAnchor = document.querySelector('.nav-anchor');
 const $btnNew = document.querySelector('.new-btn');
+const $editEntry = document.querySelector('.edit-entry-title');
 
 $input.addEventListener('input', function (e) {
   $img.setAttribute('src', e.target.value);
@@ -16,20 +19,46 @@ $input.addEventListener('input', function (e) {
 const $form = document.querySelector('form');
 $form.addEventListener('submit', function (e) {
   e.preventDefault();
-  const formData = {
-    title: $form.elements.title.value,
-    url: $form.elements.url.value,
-    textarea: $form.elements.textarea.value
-  };
+  if (data.editing === null) {
+    const formData = {
+      title: $form.elements.title.value,
+      url: $form.elements.url.value,
+      textarea: $form.elements.textarea.value,
+      entryId: data.nextEntryId
+    };
 
-  formData.entryId = data.nextEntryId++;
-  data.entries.unshift(formData);
-  $img.setAttribute('src', $attributeValue);
-  $form.reset();
+    formData.entryId = data.nextEntryId++;
+    data.entries.unshift(formData);
+    $img.setAttribute('src', $attributeValue);
+    $ul.prepend(renderEntry(formData));
+    $form.reset();
+    viewSwap('entries');
+    toggleNoEntries();
+  } else {
+    const newData = {
+      title: $form.elements.title.value,
+      url: $form.elements.url.value,
+      textarea: $form.elements.textarea.value,
+      entryId: data.editing.entryId
+    };
 
-  $ul.prepend(renderEntry(formData));
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === data.editing.entryId) {
+        data.entries[i] = newData;
+      }
+    }
+    const newEl = renderEntry(newData);
+    const allList = document.querySelectorAll('li');
+    for (let i = 0; i < allList.length; i++) {
+      const listId = Number(allList[i].getAttribute('data-entry-id'));
+      if (data.editing.entryId === listId) {
+        allList[i].replaceWith(newEl);
+      }
+    }
+
+  }
+  data.editing = null;
   viewSwap('entries');
-  toggleNoEntries();
 
 });
 
@@ -37,6 +66,7 @@ $form.addEventListener('submit', function (e) {
 
 function renderEntry(entry) {
   const list = document.createElement('li');
+  list.setAttribute('data-entry-id', entry.entryId);
 
   const firstDivColHalf = document.createElement('div');
   firstDivColHalf.setAttribute('class', 'column-half');
@@ -52,10 +82,19 @@ function renderEntry(entry) {
   secondDivColHalf.setAttribute('class', 'column-half');
   list.appendChild(secondDivColHalf);
 
+  const divIcon = document.createElement('div');
+  divIcon.setAttribute('class', 'icon');
+  secondDivColHalf.appendChild(divIcon);
+
   const h2Title = document.createElement('h2');
   h2Title.setAttribute('class', 'entries-h2');
   h2Title.textContent = entry.title;
-  secondDivColHalf.appendChild(h2Title);
+  divIcon.appendChild(h2Title);
+
+  const icon = document.createElement('i');
+  icon.setAttribute('class', 'fa fa-pencil');
+  icon.setAttribute('aria-hidden', 'true');
+  divIcon.appendChild(icon);
 
   const paragraph = document.createElement('p');
   paragraph.setAttribute('class', 'entries-p');
@@ -64,6 +103,23 @@ function renderEntry(entry) {
   secondDivColHalf.appendChild(paragraph);
   return list;
 }
+
+$ul.addEventListener('click', function (event) {
+  const listItem = event.target.closest('li');
+  const listAttribute = parseInt(listItem.getAttribute('data-entry-id'));
+
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === listAttribute) {
+      data.editing = data.entries[i];
+    }
+  }
+  $title.setAttribute('value', data.editing.title);
+  $input.setAttribute('value', data.editing.url);
+  $textArea.value = data.editing.textarea;
+  $img.setAttribute('src', data.editing.url);
+  $editEntry.textContent = 'Edit Entry';
+  viewSwap('entry-form');
+});
 
 function toggleNoEntries() {
   if (data.entries.length === 0) {
@@ -103,6 +159,11 @@ $entriesAnchor.addEventListener('click', function (e) {
 });
 
 $btnNew.addEventListener('click', function (e) {
+  data.editing = null;
+  $form.reset();
+  $img.src = './images/placeholder-image-square.jpg';
+  $editEntry.textContent = 'New Entry';
+
   viewSwap('entry-form');
 
 });

@@ -125,6 +125,7 @@ li {
 .entries-nav {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 30px;
 }
 
 .last-entries-h2 {
@@ -145,6 +146,11 @@ li {
 
 div.new-btn:hover {
   background-color: #461972;
+}
+
+.icon {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media screen and (min-width: 768px) {
