@@ -106,7 +106,6 @@ function renderEntry(entry) {
 }
 
 $ul.addEventListener('click', function (event) {
-  viewSwap('entry-form');
   const listItem = event.target.closest('li');
   const listAttribute = parseInt(listItem.getAttribute('data-entry-id'));
 
@@ -119,8 +118,8 @@ $ul.addEventListener('click', function (event) {
   $input.setAttribute('value', data.editing.url);
   $textArea.value = data.editing.textarea;
   $img.setAttribute('src', data.editing.url);
-  $labelTitle.textContent = 'Edit Entry';
   $editEntry.textContent = 'Edit Entry';
+  viewSwap('entry-form');
 });
 
 function toggleNoEntries() {
@@ -163,8 +162,6 @@ $entriesAnchor.addEventListener('click', function (e) {
 $btnNew.addEventListener('click', function (e) {
   data.editing = null;
   $form.reset();
-  $title.value = '';
-  $input.value = '';
   $img.src = './images/placeholder-image-square.jpg';
   $labelTitle.textContent = 'New Entry';
   $editEntry.textContent = 'New Entry';
