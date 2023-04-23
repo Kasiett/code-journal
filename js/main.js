@@ -11,6 +11,12 @@ const $dVEntriesAttribute = $dVEntries.getAttribute('data-view');
 const $entriesAnchor = document.querySelector('.nav-anchor');
 const $btnNew = document.querySelector('.new-btn');
 const $editEntry = document.querySelector('.edit-entry-title');
+const $formFooter = document.querySelector('.form-footer');
+const $saveBtn = document.querySelector('.save');
+const $divFixedContainer = document.querySelector('#fixed-container');
+const $cancelBtn = document.querySelector('.cancel-btn');
+const $confirmBtn = document.querySelector('.confirm-btn');
+// const $ulList = $ul.childNodes;
 
 $input.addEventListener('input', function (e) {
   $img.setAttribute('src', e.target.value);
@@ -104,6 +110,50 @@ function renderEntry(entry) {
   return list;
 }
 
+// render delete button
+
+function renderDeleteBtn() {
+
+  const divDelWrapper = document.createElement('div');
+  divDelWrapper.setAttribute('class', 'delete-btn');
+
+  $formFooter.appendChild(divDelWrapper);
+
+  const anchorDelete = document.createElement('a');
+  anchorDelete.setAttribute('class', 'delete-entry');
+  anchorDelete.setAttribute('href', '#');
+  anchorDelete.textContent = 'Delete Entry';
+
+  divDelWrapper.appendChild(anchorDelete);
+  divDelWrapper.appendChild($saveBtn);
+
+  //  event listener for delete btn
+
+  anchorDelete.addEventListener('click', function (event) {
+    $divFixedContainer.setAttribute('class', 'show');
+  });
+
+  return divDelWrapper;
+}
+
+// event for cancel btn
+
+$cancelBtn.addEventListener('click', function (event) {
+  $divFixedContainer.setAttribute('class', 'hidden');
+});
+
+// event for confirm btn
+
+$confirmBtn.addEventListener('click', function (event) {
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === data.editing.entryId) {
+      data.entries.splice(i, 1);
+
+    }
+  }
+
+});
+
 $ul.addEventListener('click', function (event) {
   const listItem = event.target.closest('li');
   const listAttribute = parseInt(listItem.getAttribute('data-entry-id'));
@@ -119,6 +169,8 @@ $ul.addEventListener('click', function (event) {
   $img.setAttribute('src', data.editing.url);
   $editEntry.textContent = 'Edit Entry';
   viewSwap('entry-form');
+  renderDeleteBtn();
+
 });
 
 function toggleNoEntries() {

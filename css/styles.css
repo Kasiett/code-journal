@@ -62,7 +62,8 @@ main {
   margin-bottom: 25px;
 }
 
-button {
+.new-btn,
+.save {
   width: 80px;
   padding: 7px 15px;
   color: white;
@@ -75,10 +76,21 @@ button:hover {
   background-color: #461972;
 }
 
+.delete-entry {
+  color: red;
+}
+
 .form-footer {
   display: flex;
   justify-content: flex-end;
   padding-top: 15px;
+}
+
+.delete-btn {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
+  width: 100%;
 }
 
 input {
@@ -151,6 +163,64 @@ div.new-btn:hover {
 .icon {
   display: flex;
   justify-content: space-between;
+}
+
+/*  mobil styles for modal page  */
+
+#fixed-container {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.737);
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* .container-none {
+  display: none;
+} */
+
+.box {
+  border: 1px solid black;
+  width: 500px;
+  height: 30vh;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.row-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+}
+
+.cancel-btn,
+.confirm-btn {
+  text-align: center;
+  margin: 15px;
+  padding: 7px 10px;
+  border-radius: 5px;
+  border: transparent;
+}
+
+.cancel-btn {
+  background-color: rgb(177, 177, 177);
+}
+
+.cancel-btn:hover {
+  background-color: rgb(136, 133, 133);
+}
+
+.confirm-btn {
+  background-color: rgb(255, 60, 60);
+}
+
+.confirm-btn:hover {
+  background-color: rgb(252, 33, 33);
 }
 
 @media screen and (min-width: 768px) {
