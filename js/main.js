@@ -16,7 +16,7 @@ const $saveBtn = document.querySelector('.save');
 const $divFixedContainer = document.querySelector('#fixed-container');
 const $cancelBtn = document.querySelector('.cancel-btn');
 const $confirmBtn = document.querySelector('.confirm-btn');
-// const $ulList = $ul.childNodes;
+const $ulList = $ul.childNodes;
 
 $input.addEventListener('input', function (e) {
   $img.setAttribute('src', e.target.value);
@@ -148,9 +148,17 @@ $confirmBtn.addEventListener('click', function (event) {
   for (let i = 0; i < data.entries.length; i++) {
     if (data.entries[i].entryId === data.editing.entryId) {
       data.entries.splice(i, 1);
+      // const editedDom = renderEntry(data.entries[i]);
+      for (let j = 0; j < $ulList.length; j++) {
+        if ($ulList[j].tagName === 'LI' && Number($ulList[j].dataset.entryId) === data.editing.entryId) {
+          $ulList[j].remove();
+        }
+      }
 
     }
   }
+  $divFixedContainer.setAttribute('class', 'hidden');
+  viewSwap('entries');
 
 });
 
