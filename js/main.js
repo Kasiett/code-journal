@@ -218,8 +218,14 @@ $entriesAnchor.addEventListener('click', function (e) {
 });
 
 $btnNew.addEventListener('click', function (e) {
+  const $deleteAnchor = document.querySelector('.delete-entry');
+
+  if ($deleteAnchor) {
+    $deleteAnchor.setAttribute('class', 'visibility-hidden');
+  }
   data.editing = null;
-  $form.reset();
+  $title.value = '';
+  $input.value = '';
   $img.src = './images/placeholder-image-square.jpg';
   $editEntry.textContent = 'New Entry';
 

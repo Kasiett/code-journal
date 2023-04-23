@@ -86,6 +86,12 @@ button:hover {
   padding-top: 15px;
 }
 
+.form-footer-delete {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
+}
+
 .delete-btn {
   display: flex;
   justify-content: space-between;
@@ -179,10 +185,6 @@ div.new-btn:hover {
   height: 100%;
 }
 
-/* .container-none {
-  display: none;
-} */
-
 .box {
   border: 1px solid black;
   width: 500px;
@@ -221,6 +223,10 @@ div.new-btn:hover {
 
 .confirm-btn:hover {
   background-color: rgb(252, 33, 33);
+}
+
+.visibility-hidden {
+  visibility: hidden;
 }
 
 @media screen and (min-width: 768px) {
