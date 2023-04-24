@@ -12,7 +12,7 @@ const $entriesAnchor = document.querySelector('.nav-anchor');
 const $btnNew = document.querySelector('.new-btn');
 const $editEntry = document.querySelector('.edit-entry-title');
 const $formFooter = document.querySelector('.form-footer');
-const $saveBtn = document.querySelector('.save');
+const $anchorShow = document.querySelector('.hidden');
 const $divFixedContainer = document.querySelector('#fixed-container');
 const $cancelBtn = document.querySelector('.cancel-btn');
 const $confirmBtn = document.querySelector('.confirm-btn');
@@ -110,32 +110,6 @@ function renderEntry(entry) {
   return list;
 }
 
-// render delete button
-
-function renderDeleteBtn() {
-
-  const divDelWrapper = document.createElement('div');
-  divDelWrapper.setAttribute('class', 'delete-btn');
-
-  $formFooter.appendChild(divDelWrapper);
-
-  const anchorDelete = document.createElement('a');
-  anchorDelete.setAttribute('class', 'delete-entry');
-  anchorDelete.setAttribute('href', '#');
-  anchorDelete.textContent = 'Delete Entry';
-
-  divDelWrapper.appendChild(anchorDelete);
-  divDelWrapper.appendChild($saveBtn);
-
-  //  event listener for delete btn
-
-  anchorDelete.addEventListener('click', function (event) {
-    $divFixedContainer.setAttribute('class', 'show');
-  });
-
-  return divDelWrapper;
-}
-
 // event for cancel btn
 
 $cancelBtn.addEventListener('click', function (event) {
@@ -161,7 +135,15 @@ $confirmBtn.addEventListener('click', function (event) {
 
 });
 
+// event for delete btn
+
+$anchorShow.addEventListener('click', function (event) {
+  $divFixedContainer.setAttribute('class', 'show');
+});
+
 $ul.addEventListener('click', function (event) {
+  $formFooter.setAttribute('class', 'form-footer-delete');
+  $anchorShow.setAttribute('class', 'anchor-show');
   const listItem = event.target.closest('li');
   const listAttribute = parseInt(listItem.getAttribute('data-entry-id'));
 
@@ -176,7 +158,6 @@ $ul.addEventListener('click', function (event) {
   $img.setAttribute('src', data.editing.url);
   $editEntry.textContent = 'Edit Entry';
   viewSwap('entry-form');
-  renderDeleteBtn();
 
 });
 
@@ -218,14 +199,13 @@ $entriesAnchor.addEventListener('click', function (e) {
 });
 
 $btnNew.addEventListener('click', function (e) {
-  const $deleteAnchor = document.querySelector('.delete-entry');
-
-  if ($deleteAnchor) {
-    $deleteAnchor.setAttribute('class', 'visibility-hidden');
+  if ($anchorShow) {
+    $anchorShow.setAttribute('class', 'visibility-hidden');
   }
   data.editing = null;
   $title.value = '';
   $input.value = '';
+  $textArea.value = '';
   $img.src = './images/placeholder-image-square.jpg';
   $editEntry.textContent = 'New Entry';
 
