@@ -11,6 +11,12 @@ const $dVEntriesAttribute = $dVEntries.getAttribute('data-view');
 const $entriesAnchor = document.querySelector('.nav-anchor');
 const $btnNew = document.querySelector('.new-btn');
 const $editEntry = document.querySelector('.edit-entry-title');
+const $formFooter = document.querySelector('.form-footer');
+const $anchorShow = document.querySelector('.hidden');
+const $divFixedContainer = document.querySelector('#fixed-container');
+const $cancelBtn = document.querySelector('.cancel-btn');
+const $confirmBtn = document.querySelector('.confirm-btn');
+const $ulList = $ul.childNodes;
 
 $input.addEventListener('input', function (e) {
   $img.setAttribute('src', e.target.value);
@@ -104,7 +110,40 @@ function renderEntry(entry) {
   return list;
 }
 
+// event for cancel btn
+
+$cancelBtn.addEventListener('click', function (event) {
+  $divFixedContainer.setAttribute('class', 'hidden');
+});
+
+// event for confirm btn
+
+$confirmBtn.addEventListener('click', function (event) {
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === data.editing.entryId) {
+      data.entries.splice(i, 1);
+      for (let j = 0; j < $ulList.length; j++) {
+        if ($ulList[j].tagName === 'LI' && Number($ulList[j].dataset.entryId) === data.editing.entryId) {
+          $ulList[j].remove();
+        }
+      }
+
+    }
+  }
+  $divFixedContainer.setAttribute('class', 'hidden');
+  viewSwap('entries');
+
+});
+
+// event for delete btn
+
+$anchorShow.addEventListener('click', function (event) {
+  $divFixedContainer.setAttribute('class', 'show');
+});
+
 $ul.addEventListener('click', function (event) {
+  $formFooter.setAttribute('class', 'form-footer-delete');
+  $anchorShow.setAttribute('class', 'anchor-show');
   const listItem = event.target.closest('li');
   const listAttribute = parseInt(listItem.getAttribute('data-entry-id'));
 
@@ -119,6 +158,7 @@ $ul.addEventListener('click', function (event) {
   $img.setAttribute('src', data.editing.url);
   $editEntry.textContent = 'Edit Entry';
   viewSwap('entry-form');
+
 });
 
 function toggleNoEntries() {
@@ -159,8 +199,13 @@ $entriesAnchor.addEventListener('click', function (e) {
 });
 
 $btnNew.addEventListener('click', function (e) {
+  if ($anchorShow) {
+    $anchorShow.setAttribute('class', 'visibility-hidden');
+  }
   data.editing = null;
-  $form.reset();
+  $title.value = '';
+  $input.value = '';
+  $textArea.value = '';
   $img.src = './images/placeholder-image-square.jpg';
   $editEntry.textContent = 'New Entry';
 
